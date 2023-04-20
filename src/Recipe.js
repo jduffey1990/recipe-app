@@ -1,25 +1,23 @@
 import React from "react";
 import RecipeData from "./RecipeData.js"
 
-function Recipe({recipe, deleteRecipe}) {
-  
-  // TODO: Display the list of recipes using the structure of table that is provided.
-  // TODO: Create at least one additional component that is used by this component.
-  // TODO: Each recipe row must have a delete button - <button name="delete">Delete</button> - that deletes the post when clicked
+function Recipe({ recipe, deleteRecipe }) {
+
+  //This component is made to set up the tablke format for one given recipe.
 
   return (
-      <tr>
-            <td>{recipe.name}</td>
-            <td>{recipe.cuisine}</td>
-            <td>
-              <img src={recipe.photo} alt={recipe.name} />
-            </td>
-            <td className="content_td"><p>{recipe.ingredients}</p></td>
-            <td className="content_td"><p>{recipe.preparation}</p></td>
-            <td>
-                <button name="delete" onClick={deleteRecipe}>Delete</button>
-            </td>
-      </tr>
+    <tr>
+      <td>{recipe.name}</td>
+      <td>{recipe.cuisine}</td>
+      <td>
+        <img src={recipe.photo} alt={recipe.name} />
+      </td>
+      <td className="content_td"><p>{recipe.ingredients}</p></td>
+      <td className="content_td"><p>{recipe.preparation}</p></td>
+      <td>
+        <button name="delete" onClick={deleteRecipe}>Delete</button>
+      </td>
+    </tr>
   );
 }
 
