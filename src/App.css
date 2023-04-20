@@ -11,7 +11,7 @@ label {
 
 header {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  
+
 }
 
 h1 {
@@ -24,24 +24,32 @@ html {
   font-family: 'helvetica neue', sans-serif;
 }
 
-thead th, tfoot th {
+thead th,
+tfoot th {
   font-family: 'Rock Salt';
 }
 
 th {
   letter-spacing: 2px;
   padding: 10px;
-  width: 10%; 
+  width: 10%;
 }
 
 td {
   letter-spacing: 1px;
-  overflow-x:hidden;
-  overflow-y:hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
   font-size: 12px;
   padding: 10px;
   text-align: center;
-  width: 10%; 
+  width: 10%;
+}
+
+img {
+  float: left;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
 }
 
 /* table */
@@ -50,11 +58,11 @@ table {
   table-layout: fixed;
   width: 100%;
   border-collapse: collapse;
-  overflow:hidden;
+  overflow: hidden;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.content_td p{
+.content_td p {
   max-width: 100%;
   max-height: 100px;
   overflow-y: auto;
@@ -72,11 +80,13 @@ tbody tr:nth-child(odd) {
 }
 
 /* Column Size for thead */
-th:nth-child(4), th:nth-child(5) {
+th:nth-child(4),
+th:nth-child(5) {
   width: 30%;
 }
 
 /* Column size for tbody */
-td:nth-child(5), td:nth-child(4) {
+td:nth-child(5),
+td:nth-child(4) {
   width: 30%;
 }
