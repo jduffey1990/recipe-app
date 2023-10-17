@@ -2,6 +2,8 @@
 
 This is a React-based web application for browsing and storing favorite recipes. You can view the deployed app at [here](https://recipe-app-indol.vercel.app/).
 
+### *This is only front end, did this project early in my bootcamp.
+
 ## Features
 
 - Browse a variety of recipes
