@@ -33,7 +33,8 @@ export default {
   methods: {
     async fetchRecipes() {
       try {
-        const response = await axios.get('http://localhost:8000/api/recipes/');
+        const baseURL = process.env.VUE_APP_API_URL || 'http://localhost:8000';
+        const response = await axios.get(`${baseURL}/api/recipes/`);
         this.recipes = response.data;
       } catch (error) {
         console.error('Error fetching recipes:', error);
@@ -41,11 +42,13 @@ export default {
     },
     async deleteRecipe(recipeId) {
       try {
+        const baseURL = process.env.VUE_APP_API_URL || 'http://localhost:8000';
+        
         // First, delete all ingredients associated with the recipe
-        await axios.delete(`http://localhost:8000/api/ingredients/delete_by_recipe/?recipe_id=${recipeId}`);
+        await axios.delete(`${baseURL}/api/ingredients/delete_by_recipe/?recipe_id=${recipeId}`);
 
         // Then, delete the recipe itself
-        await axios.delete(`http://localhost:8000/api/recipes/delete_by_recipe/?id=${recipeId}`);
+        await axios.delete(`${baseURL}/api/recipes/delete_by_recipe/?id=${recipeId}`);
 
         // Fetch the updated list of recipes
         this.fetchRecipes();
@@ -56,6 +59,7 @@ export default {
   }
 };
 </script>
+
 
 <style>
 .container {

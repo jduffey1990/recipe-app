@@ -41,41 +41,41 @@ export default {
         ingredients: [],
       },
       units: [
-      { "value": "ml", "text": "Milliliters" },
-      { "value": "l", "text": "Liters" },
-      { "value": "tsp", "text": "Teaspoons" },
-      { "value": "tbsp", "text": "Tablespoons" },
-      { "value": "fl oz", "text": "Fluid Ounces" },
-      { "value": "cup", "text": "Cups" },
-      { "value": "pt", "text": "Pints" },
-      { "value": "qt", "text": "Quarts" },
-      { "value": "gal", "text": "Gallons" },
-      { "value": "mg", "text": "Milligrams" },
-      { "value": "g", "text": "Grams" },
-      { "value": "kg", "text": "Kilograms" },
-      { "value": "oz", "text": "Ounces" },
-      { "value": "lb", "text": "Pounds" },
-      { "value": "pinch", "text": "Pinches" },
-      { "value": "dash", "text": "Dashes" },
-      { "value": "smidgen", "text": "Smidgens" },
-      { "value": "clove", "text": "Clove" },
-      { "value": "dl", "text": "Deciliters" },
-      { "value": "hl", "text": "Hectoliters" },
-      { "value": "piece", "text": "Pieces" },
-      { "value": "stick", "text": "Sticks" },
-      { "value": "sheet", "text": "Sheets" },
-      { "value": "can", "text": "Cans" },
-      { "value": "jar", "text": "Jars" },
-      { "value": "pkg", "text": "Packages" },
-      { "value": "bunch", "text": "Bunches" },
-      { "value": "bag", "text": "Bags" },
-      { "value": "bottle", "text": "Bottles" },
-      { "value": "sprig", "text": "Sprigs" },
-      { "value": "head", "text": "Heads" },
-      { "value": "slice", "text": "Slices" },
-      { "value": "grain", "text": "Grains" },
-      { "value": "drop", "text": "Drops" },
-      { "value": "whole", "text": "Whole" },
+        { "value": "ml", "text": "Milliliters" },
+        { "value": "l", "text": "Liters" },
+        { "value": "tsp", "text": "Teaspoons" },
+        { "value": "tbsp", "text": "Tablespoons" },
+        { "value": "fl oz", "text": "Fluid Ounces" },
+        { "value": "cup", "text": "Cups" },
+        { "value": "pt", "text": "Pints" },
+        { "value": "qt", "text": "Quarts" },
+        { "value": "gal", "text": "Gallons" },
+        { "value": "mg", "text": "Milligrams" },
+        { "value": "g", "text": "Grams" },
+        { "value": "kg", "text": "Kilograms" },
+        { "value": "oz", "text": "Ounces" },
+        { "value": "lb", "text": "Pounds" },
+        { "value": "pinch", "text": "Pinches" },
+        { "value": "dash", "text": "Dashes" },
+        { "value": "smidgen", "text": "Smidgens" },
+        { "value": "clove", "text": "Clove" },
+        { "value": "dl", "text": "Deciliters" },
+        { "value": "hl", "text": "Hectoliters" },
+        { "value": "piece", "text": "Pieces" },
+        { "value": "stick", "text": "Sticks" },
+        { "value": "sheet", "text": "Sheets" },
+        { "value": "can", "text": "Cans" },
+        { "value": "jar", "text": "Jars" },
+        { "value": "pkg", "text": "Packages" },
+        { "value": "bunch", "text": "Bunches" },
+        { "value": "bag", "text": "Bags" },
+        { "value": "bottle", "text": "Bottles" },
+        { "value": "sprig", "text": "Sprigs" },
+        { "value": "head", "text": "Heads" },
+        { "value": "slice", "text": "Slices" },
+        { "value": "grain", "text": "Grains" },
+        { "value": "drop", "text": "Drops" },
+        { "value": "whole", "text": "Whole" },
       ]
     };
   },
@@ -95,7 +95,8 @@ export default {
       formData.append('description', this.recipe.description);
 
       try {
-        const response = await axios.post('http://localhost:8000/api/recipes/', formData, {
+        const baseURL = process.env.VUE_APP_API_URL || 'http://localhost:8000';
+        const response = await axios.post(`${baseURL}/api/recipes/`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
@@ -110,7 +111,8 @@ export default {
           ingredientData.append('quantity', ingredient.quantity);
           ingredientData.append('unit', ingredient.unit);
 
-          await axios.post('http://localhost:8000/api/ingredients/', ingredientData, {
+          const baseURL = process.env.VUE_APP_API_URL || 'http://localhost:8000';
+          await axios.post(`${baseURL}/api/ingredients/`, ingredientData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
@@ -134,6 +136,7 @@ export default {
   }
 };
 </script>
+
 
 <style>
 .container {

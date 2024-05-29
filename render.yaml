@@ -6,16 +6,20 @@ services:
     plan: free
     dockerfilePath: ./recipe_app/Dockerfile
     envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: recipe_app.settings
+      - key: DJANGO_SECRET_KEY
+        value: ${{ secrets.DJANGO_SECRET_KEY }}
       - key: POSTGRES_DB
-        value: recipeappdb
+        value: ${{ secrets.POSTGRES_DB }}
       - key: POSTGRES_USER
-        value: recipeappdb_owner
+        value: ${{ secrets.POSTGRES_USER }}
       - key: POSTGRES_PASSWORD
-        value: shg7lzKDZb1m
+        value: ${{ secrets.POSTGRES_PASSWORD }}
       - key: POSTGRES_HOST
-        value: db
+        value: ${{ secrets.POSTGRES_HOST }}
       - key: POSTGRES_PORT
-        value: 5432
+        value: ${{ secrets.POSTGRES_PORT }}
     database:
       type: postgresql
       plan: free
@@ -26,3 +30,6 @@ services:
     env: docker
     plan: free
     dockerfilePath: ./recipe-frontend/Dockerfile
+    envVars:
+      - key: VUE_APP_API_URL
+        value: ${{ secrets.VUE_APP_API_URL}}
