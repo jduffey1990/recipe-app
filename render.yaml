@@ -21,7 +21,6 @@ services:
       - key: POSTGRES_PORT
         value: ${{ secrets.POSTGRES_PORT }}
     buildCommand: python manage.py collectstatic --noinput
-    startCommand: gunicorn recipe_app.wsgi
 
   - type: web
     name: recipe-frontend
@@ -32,4 +31,4 @@ services:
       - key: VUE_APP_API_URL
         value: ${{ secrets.VUE_APP_API_URL }}
     buildCommand: npm install
-    startCommand: npm run serve
+
