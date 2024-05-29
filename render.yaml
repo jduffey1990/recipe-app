@@ -33,8 +33,3 @@ services:
         value: ${{ secrets.VUE_APP_API_URL }}
     buildCommand: npm install
     startCommand: npm run serve
-
-databases:
-  - name: recipe-db
-    plan: free
-    engine: postgresql
