@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +22,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-j_lkir&#h5h%de#=^wfrnd4oa&vd*dbs*o^&r1n2d0$z@-h4e%'
+
+
+# Initialize environment variables
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+
+# Reading .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -95,13 +106,13 @@ CORS_ALLOW_METHODS = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'recipeappdb',  # Your actual DB name
-        'USER': 'recipeappdb_owner',  # Your actual DB user
-        'PASSWORD': 'shg7lzKDZb1m',  # Your actual DB password
-        'HOST': 'ep-broad-limit-a59aggxq.us-east-2.aws.neon.tech',  # Your actual DB host
-        'PORT': '5432',  # Default PostgreSQL port
+        'NAME': env('POSTGRES_DB'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'HOST': env('POSTGRES_HOST'),
+        'PORT': env('POSTGRES_PORT'),
         'OPTIONS': {
-            'sslmode': 'require',  # Ensure SSL connection
+            'sslmode': 'require',
         }
     }
 }
