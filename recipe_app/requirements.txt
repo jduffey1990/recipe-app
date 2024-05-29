@@ -3,3 +3,4 @@ djangorestframework>=3.0,<4.0
 psycopg2-binary
 django-cors-headers
 django-environ
+gunicorn

@@ -20,10 +20,8 @@ services:
         value: ${{ secrets.POSTGRES_HOST }}
       - key: POSTGRES_PORT
         value: ${{ secrets.POSTGRES_PORT }}
-    database:
-      type: postgresql
-      plan: free
-      name: recipe-db
+    buildCommand: python manage.py collectstatic --noinput
+    startCommand: gunicorn recipe_app.wsgi
 
   - type: web
     name: recipe-frontend
@@ -38,5 +36,5 @@ services:
 
 databases:
   - name: recipe-db
-    type: postgresql
     plan: free
+    engine: postgresql
