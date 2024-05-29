@@ -1,4 +1,4 @@
-//render.yaml
+# render.yaml
 services:
   - type: web
     name: recipe-backend
@@ -32,4 +32,11 @@ services:
     dockerfilePath: ./recipe-frontend/Dockerfile
     envVars:
       - key: VUE_APP_API_URL
-        value: ${{ secrets.VUE_APP_API_URL}}
+        value: ${{ secrets.VUE_APP_API_URL }}
+    buildCommand: npm install
+    startCommand: npm run serve
+
+databases:
+  - name: recipe-db
+    type: postgresql
+    plan: free
