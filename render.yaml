@@ -1,0 +1,28 @@
+//render.yaml
+services:
+  - type: web
+    name: recipe-backend
+    env: docker
+    plan: free
+    dockerfilePath: ./recipe_app/Dockerfile
+    envVars:
+      - key: POSTGRES_DB
+        value: recipeappdb
+      - key: POSTGRES_USER
+        value: recipeappdb_owner
+      - key: POSTGRES_PASSWORD
+        value: shg7lzKDZb1m
+      - key: POSTGRES_HOST
+        value: db
+      - key: POSTGRES_PORT
+        value: 5432
+    database:
+      type: postgresql
+      plan: free
+      name: recipe-db
+
+  - type: web
+    name: recipe-frontend
+    env: docker
+    plan: free
+    dockerfilePath: ./recipe-frontend/Dockerfile

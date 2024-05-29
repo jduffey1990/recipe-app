@@ -90,16 +90,18 @@ CORS_ALLOW_METHODS = [
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'recipeappdb',
-        'USER': 'recipeappdb_owner',
-        'PASSWORD': 'shg7lzKDZb1m',
-        'HOST': 'ep-broad-limit-a59aggxq.us-east-2.aws.neon.tech',
-        'PORT': '5432',
+        'NAME': 'recipeappdb',  # Your actual DB name
+        'USER': 'recipeappdb_owner',  # Your actual DB user
+        'PASSWORD': 'shg7lzKDZb1m',  # Your actual DB password
+        'HOST': 'ep-broad-limit-a59aggxq.us-east-2.aws.neon.tech',  # Your actual DB host
+        'PORT': '5432',  # Default PostgreSQL port
         'OPTIONS': {
-            'sslmode': 'require',
+            'sslmode': 'require',  # Ensure SSL connection
         }
     }
 }
