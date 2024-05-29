@@ -11,10 +11,6 @@
         <textarea v-model="recipe.description" id="description" required></textarea>
       </div>
       <div class="form-group">
-        <label for="photo">Photo</label>
-        <input type="file" @change="onFileChange" id="photo">
-      </div>
-      <div class="form-group">
         <h3>Ingredients</h3>
         <div v-for="(ingredient, index) in recipe.ingredients" :key="index" class="ingredient-group">
           <input type="text" v-model="ingredient.name" placeholder="Ingredient name" required>
@@ -43,26 +39,43 @@ export default {
         title: '',
         description: '',
         ingredients: [],
-        photo: null
       },
       units: [
-        { value: 'ml', text: 'Milliliters' },
-        { value: 'l', text: 'Liters' },
-        { value: 'tsp', text: 'Teaspoons' },
-        { value: 'tbsp', text: 'Tablespoons' },
-        { value: 'fl oz', text: 'Fluid Ounces' },
-        { value: 'cup', text: 'Cups' },
-        { value: 'pt', text: 'Pints' },
-        { value: 'qt', text: 'Quarts' },
-        { value: 'gal', text: 'Gallons' },
-        { value: 'mg', text: 'Milligrams' },
-        { value: 'g', text: 'Grams' },
-        { value: 'kg', text: 'Kilograms' },
-        { value: 'oz', text: 'Ounces' },
-        { value: 'lb', text: 'Pounds' },
-        { value: 'pinch', text: 'Pinches' },
-        { value: 'dash', text: 'Dashes' },
-        { value: 'smidgen', text: 'Smidgens' }
+      { "value": "ml", "text": "Milliliters" },
+      { "value": "l", "text": "Liters" },
+      { "value": "tsp", "text": "Teaspoons" },
+      { "value": "tbsp", "text": "Tablespoons" },
+      { "value": "fl oz", "text": "Fluid Ounces" },
+      { "value": "cup", "text": "Cups" },
+      { "value": "pt", "text": "Pints" },
+      { "value": "qt", "text": "Quarts" },
+      { "value": "gal", "text": "Gallons" },
+      { "value": "mg", "text": "Milligrams" },
+      { "value": "g", "text": "Grams" },
+      { "value": "kg", "text": "Kilograms" },
+      { "value": "oz", "text": "Ounces" },
+      { "value": "lb", "text": "Pounds" },
+      { "value": "pinch", "text": "Pinches" },
+      { "value": "dash", "text": "Dashes" },
+      { "value": "smidgen", "text": "Smidgens" },
+      { "value": "clove", "text": "Clove" },
+      { "value": "dl", "text": "Deciliters" },
+      { "value": "hl", "text": "Hectoliters" },
+      { "value": "piece", "text": "Pieces" },
+      { "value": "stick", "text": "Sticks" },
+      { "value": "sheet", "text": "Sheets" },
+      { "value": "can", "text": "Cans" },
+      { "value": "jar", "text": "Jars" },
+      { "value": "pkg", "text": "Packages" },
+      { "value": "bunch", "text": "Bunches" },
+      { "value": "bag", "text": "Bags" },
+      { "value": "bottle", "text": "Bottles" },
+      { "value": "sprig", "text": "Sprigs" },
+      { "value": "head", "text": "Heads" },
+      { "value": "slice", "text": "Slices" },
+      { "value": "grain", "text": "Grains" },
+      { "value": "drop", "text": "Drops" },
+      { "value": "whole", "text": "Whole" },
       ]
     };
   },
@@ -80,9 +93,6 @@ export default {
       const formData = new FormData();
       formData.append('title', this.recipe.title);
       formData.append('description', this.recipe.description);
-      if (this.recipe.photo) {
-        formData.append('photo', this.recipe.photo);
-      }
 
       try {
         const response = await axios.post('http://localhost:8000/api/recipes/', formData, {

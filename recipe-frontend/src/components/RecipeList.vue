@@ -6,10 +6,10 @@
         <div class="recipe-header">
           <h2>{{ recipe.title }}</h2>
           <p>{{ recipe.description }}</p>
+          <button @click="deleteRecipe(recipe.id)" class="delete-btn">Delete</button>
         </div>
-        <img :src="recipe.photo" alt="Recipe photo" v-if="recipe.photo" class="recipe-photo"/>
         <ul class="ingredient-list">
-          <li v-for="ingredient in recipe.ingredients" :key="ingredient.name" class="ingredient-item">
+          <li v-for="ingredient in recipe.ingredients" :key="ingredient.id" class="ingredient-item">
             {{ ingredient.quantity }} {{ ingredient.unit }} of {{ ingredient.name }}
           </li>
         </ul>
@@ -34,14 +34,23 @@ export default {
     async fetchRecipes() {
       try {
         const response = await axios.get('http://localhost:8000/api/recipes/');
-        const recipes = await Promise.all(response.data.map(async recipe => {
-          const ingredientsResponse = await axios.get(`http://localhost:8000/api/ingredients/?recipe=${recipe.id}`);
-          recipe.ingredients = ingredientsResponse.data;
-          return recipe;
-        }));
-        this.recipes = recipes;
+        this.recipes = response.data;
       } catch (error) {
         console.error('Error fetching recipes:', error);
+      }
+    },
+    async deleteRecipe(recipeId) {
+      try {
+        // First, delete all ingredients associated with the recipe
+        await axios.delete(`http://localhost:8000/api/ingredients/delete_by_recipe/?recipe_id=${recipeId}`);
+
+        // Then, delete the recipe itself
+        await axios.delete(`http://localhost:8000/api/recipes/delete_by_recipe/?id=${recipeId}`);
+
+        // Fetch the updated list of recipes
+        this.fetchRecipes();
+      } catch (error) {
+        console.error('Error deleting recipe:', error);
       }
     }
   }
@@ -93,12 +102,6 @@ h1 {
   color: #666;
 }
 
-.recipe-photo {
-  max-width: 100%;
-  border-radius: 10px;
-  margin: 10px 0;
-}
-
 .ingredient-list {
   list-style: none;
   padding: 0;
@@ -111,5 +114,14 @@ h1 {
   padding: 5px;
   margin-bottom: 5px;
   color: #333;
+}
+.delete-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 </style>

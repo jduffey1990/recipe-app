@@ -80,7 +80,12 @@ WSGI_APPLICATION = 'recipe_app.wsgi.application'
 
 CORS_ORIGIN_ALLOW_ALL = True  # For development purposes only
 
-
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'POST',
+]
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
