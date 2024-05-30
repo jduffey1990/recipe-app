@@ -1,18 +1,17 @@
 # Dockerfile for Vue frontend
-
-# Use the official Node.js image from the Docker Hub
 FROM node:14
 
-# Set the working directory
+# Set working directory
 WORKDIR /app
 
-# Copy the entire project into the container
-COPY recipe-frontend /app/
-
-# Install any dependencies
+# Install dependencies
+COPY package*.json ./
 RUN npm install
 
-# Expose the port the app runs on
+# Copy project
+COPY . .
+
+# Expose port 8080
 EXPOSE 8080
 
 # Run the application
