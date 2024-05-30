@@ -7,7 +7,7 @@ FROM node:14
 WORKDIR /app
 
 # Copy the entire project into the container
-COPY . /app/
+COPY recipe-frontend /app/
 
 # Install any dependencies
 RUN npm install
