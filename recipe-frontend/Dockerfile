@@ -5,11 +5,13 @@ FROM node:14
 WORKDIR /app
 
 # Install dependencies
-COPY package*.json ./
+COPY recipe-frontend/package*.json ./
+
+
 RUN npm install
 
 # Copy project
-COPY . .
+COPY recipe-frontend .
 
 # Expose port 8080
 EXPOSE 8080
