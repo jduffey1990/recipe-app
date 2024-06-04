@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: gcr.io/recipe-application-424920/backend:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: DATABASE_URL
+        - name: DJANGO_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backend-secrets
+              key: DJANGO_SECRET_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  type: ClusterIP
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+
+
+
+
+
+# from root cmd - docker build -t gcr.io/recipe-application-424920/backend:latest -f ./recipe_app/Dockerfile ./recipe_app
+# after build - docker push gcr.io/recipe-application-424920/backend:latest
+# kubectl apply -f ./recipe_app/backend-deployment.yaml
+
+
+# status reports -  kubectl get services - kubectl get deployments - kubectl get pods - kubectl logs backend-deployment-595bdd5496-72nlm -or- backend-deployment-595bdd5496-msrnv

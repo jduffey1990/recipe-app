@@ -11,7 +11,7 @@ env = environ.Env(
 )
 
 # Reading .env file
-environ.Env.read_env(os.path.join(BASE_DIR, 'recipe_app/.env'))
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('DJANGO_SECRET_KEY')

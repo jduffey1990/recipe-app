@@ -9,8 +9,6 @@ services:
       - "8000:8000"
     env_file:
       - ./recipe_app/.env
-    depends_on:
-      - db
 
   frontend:
     build: ./recipe-frontend
@@ -19,16 +17,9 @@ services:
     ports:
       - "8080:8080"
     env_file:
-      - ./recipe-frontend/.env
+      - ./recipe-frontend/.env.local
+    command: npm run serve
 
-  db:
-    image: postgres:13
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
 volumes:
   postgres_data:

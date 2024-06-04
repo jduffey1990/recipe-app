@@ -15,7 +15,7 @@
         <div v-for="(ingredient, index) in recipe.ingredients" :key="index" class="ingredient-group">
           <input type="text" v-model="ingredient.name" placeholder="Ingredient name" required>
           <input type="number" v-model="ingredient.quantity" placeholder="Quantity" required>
-          <select v-model="ingredient.unit" required>
+          <select v-model="ingredient.unit" placeholder="Unit" required>
             <option v-for="unit in units" :key="unit.value" :value="unit.value">
               {{ unit.text }}
             </option>
@@ -96,6 +96,7 @@ export default {
 
       try {
         const baseURL = process.env.VUE_APP_API_URL || 'http://localhost:8000';
+
         const response = await axios.post(`${baseURL}/api/recipes/`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
@@ -112,6 +113,7 @@ export default {
           ingredientData.append('unit', ingredient.unit);
 
           const baseURL = process.env.VUE_APP_API_URL || 'http://localhost:8000';
+          
           await axios.post(`${baseURL}/api/ingredients/`, ingredientData, {
             headers: {
               'Content-Type': 'multipart/form-data'

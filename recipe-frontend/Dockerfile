@@ -1,4 +1,5 @@
 # Dockerfile for Vue frontend
+
 FROM node:14
 
 # Set working directory
@@ -8,11 +9,15 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Copy project
+# Copy project files
 COPY . .
 
-# Expose port 8080
-EXPOSE 8080
+# Copy the production environment file
+COPY .env.production .env
 
-# Run the application
+# Build the project
+RUN npm run build
+
+# Expose the port and start the application
+EXPOSE 8080
 CMD ["npm", "run", "serve"]
